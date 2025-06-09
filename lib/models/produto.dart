@@ -1,5 +1,5 @@
 // lib/models/produto.dart
-import '../core/base/entity_mapper.dart';
+import 'base/entity_mapper.dart';
 
 class Produto with EntityMapper {
   // ─────────────────── Campos ───────────────────

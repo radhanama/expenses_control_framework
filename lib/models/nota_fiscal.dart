@@ -1,6 +1,6 @@
 // lib/models/nota_fiscal.dart
 import 'dart:io'; // File for the image path
-import '../core/base/entity_mapper.dart';
+import 'base/entity_mapper.dart';
 import 'produto.dart';
 
 class NotaFiscal with EntityMapper {

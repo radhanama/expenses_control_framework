@@ -1,9 +1,9 @@
-// lib/core/statistics/i_estrategia_estatistica.dart
+// lib/models/statistics/i_estrategia_estatistica.dart
 //
 // Strategy contract (hot-spot).  Keeps framework agnostic of the concrete
 // calculation logic.
 
-import '../../models/gasto.dart';
+import '../gasto.dart';
 import 'estatistica_dto.dart';
 
 abstract class IEstrategiaEstatistica {

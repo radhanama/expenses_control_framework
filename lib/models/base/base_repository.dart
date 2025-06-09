@@ -1,4 +1,4 @@
-// lib/core/base/base_repository.dart
+// lib/modelsbase/base_repository.dart
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'entity_mapper.dart';

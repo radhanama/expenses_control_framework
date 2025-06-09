@@ -1,9 +1,9 @@
-// lib/core/statistics/estatistica_dto.dart
+// lib/models/statistics/estatistica_dto.dart
 //
 // Simple DTO shared by any strategy implementation.
 // Feel free to extend or swap with more advanced fields later.
 
-import '../../models/gasto.dart';
+import '../gasto.dart';
 
 class EstatisticaDTO {
   final double totalGastos;

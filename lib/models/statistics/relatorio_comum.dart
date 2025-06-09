@@ -1,4 +1,4 @@
-// lib/core/statistics/relatorio_comum.dart
+// lib/models/statistics/relatorio_comum.dart
 //
 // Concrete strategy that performs a straightforward aggregation:
 //   • soma total de gastos
@@ -6,8 +6,8 @@
 //
 // Ships with the framework as a <<frozenspot>> implementation.
 
-import '../../models/gasto.dart';
-import '../../models/produto.dart';
+import '../gasto.dart';
+import '../produto.dart';
 import 'i_estrategia_estatistica.dart';
 import 'estatistica_dto.dart';
 

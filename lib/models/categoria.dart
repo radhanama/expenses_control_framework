@@ -1,5 +1,5 @@
 // lib/models/categoria.dart
-import '../core/base/entity_mapper.dart';
+import 'base/entity_mapper.dart';
 
 class Categoria with EntityMapper {
   // ────────────────── Campos ──────────────────

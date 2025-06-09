@@ -4,8 +4,8 @@
 // which AuthenticationService will use for login.
 
 import 'package:sqflite/sqflite.dart';
-import '../core/base/base_repository.dart';
-import '../models/usuario.dart';
+import '../base/base_repository.dart';
+import '../usuario.dart';
 
 class UsuarioRepository extends BaseRepository<Usuario> {
   UsuarioRepository(Database db)

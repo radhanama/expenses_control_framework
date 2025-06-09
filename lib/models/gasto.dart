@@ -1,5 +1,5 @@
 // lib/models/gasto.dart
-import '../core/base/entity_mapper.dart';
+import 'base/entity_mapper.dart';
 import 'produto.dart';
 
 class Gasto with EntityMapper {

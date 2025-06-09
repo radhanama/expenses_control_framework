@@ -3,9 +3,9 @@
 // Domain entity that represents a user.  Implements EntityMapper so it can
 // be persisted via BaseRepository<Usuario>.
 
-import '../core/base/entity_mapper.dart';
+import 'base/entity_mapper.dart';
 import 'gasto.dart';
-import '../core/statistics/estatistica_dto.dart'; // implement or swap for your own DTO
+import 'statistics/estatistica_dto.dart'; // implement or swap for your own DTO
 
 class Usuario with EntityMapper {
   // ─────────────────── Fields ───────────────────
