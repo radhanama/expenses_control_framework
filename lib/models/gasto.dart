@@ -1,8 +1,8 @@
 // lib/models/gasto.dart
-import 'base/user_entity.dart';
+import 'base/base_user_entity.dart';
 import 'produto.dart';
 
-class Gasto extends UserEntity {
+class Gasto extends BaseUserEntity {
   // ---------------------------------------------------------------------------
   // Fields
   // ---------------------------------------------------------------------------
@@ -20,14 +20,14 @@ class Gasto extends UserEntity {
   // Constructor
   // ---------------------------------------------------------------------------
   const Gasto({
-    int? id,
-    required int usuarioId,
+    super.id,
+    required super.usuarioId,
     required this.total,
     required this.data,
     required this.categoriaId,
     required this.local,
     this.produtos = const [],
-  }) : super(id: id, usuarioId: usuarioId);
+  });
 
   // ---------------------------------------------------------------------------
   // Domain helpers (optional)

@@ -1,22 +1,20 @@
 // lib/models/nota_fiscal.dart
 import 'dart:io'; // File for the image path
-import 'base/user_entity.dart';
+import 'base/base_user_entity.dart';
 import 'produto.dart';
 
-class NotaFiscal extends UserEntity {
+class NotaFiscal extends BaseUserEntity {
   // ─────────────────── Campos ───────────────────
-  @override
-  final int? id; // null antes do insert
   final File? imagem; // imagem no storage local (opcional)
   final String textoExtraido; // OCR completo já limpo
 
   // ───────────────── Construtor ─────────────────
   const NotaFiscal({
-    int? id,
-    required int usuarioId,
+    super.id,
+    required super.usuarioId,
     this.imagem,
     required this.textoExtraido,
-  }) : super(id: id, usuarioId: usuarioId);
+  });
 
   // ─────── Nome da tabela exigido pelo EntityMapper ───────
   @override

@@ -1,22 +1,20 @@
 // lib/models/produto.dart
-import 'base/user_entity.dart';
+import 'base/base_user_entity.dart';
 
-class Produto extends UserEntity {
+class Produto extends BaseUserEntity {
   // ─────────────────── Campos ───────────────────
-  @override
-  final int? id; // null antes de persistir
   final String nome;
   final double preco;
   final int quantidade;
 
   // ───────────────── Construtor ─────────────────
   const Produto({
-    int? id,
-    required int usuarioId,
+    super.id,
+    required super.usuarioId,
     required this.nome,
     required this.preco,
     required this.quantidade,
-  }) : super(id: id, usuarioId: usuarioId);
+  });
 
   // ─────── Nome da tabela exigido pelo EntityMapper ───────
   @override

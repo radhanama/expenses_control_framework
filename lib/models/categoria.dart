@@ -1,10 +1,8 @@
 // lib/models/categoria.dart
-import 'base/user_entity.dart';
+import 'base/base_user_entity.dart';
 
-class Categoria extends UserEntity {
+class Categoria extends BaseUserEntity {
   // ────────────────── Campos ──────────────────
-  @override
-  final int? id; // PK (null antes de persistir)
   final String titulo;
   final String descricao;
 
@@ -17,13 +15,13 @@ class Categoria extends UserEntity {
 
   // ───────────────── Construtor ─────────────────
   const Categoria({
-    int? id,
-    required int usuarioId,
+    super.id,
+    required super.usuarioId,
     required this.titulo,
     required this.descricao,
     this.parentId,
     this.subcategorias = const [],
-  }) : super(id: id, usuarioId: usuarioId);
+  });
 
   // ─────────── Nome da tabela (EntityMapper) ───────────
   @override
