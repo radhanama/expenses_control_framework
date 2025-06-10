@@ -40,9 +40,8 @@ abstract class BaseRepository<T extends EntityMapper> {
   }
 
   Future<T> create(T entity) async {
-    final newId = await _db
-        .insert(_dummy.tableName, entity.toMap())
-        .then((i) => i.toString());
+    final newId =
+        await _db.insert(_dummy.tableName, entity.toMap()).then((i) => i);
     return _fromMap({...entity.toMap(), 'id': newId});
   }
 

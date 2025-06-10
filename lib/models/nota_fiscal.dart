@@ -22,14 +22,19 @@ class NotaFiscal with EntityMapper {
   String get tableName => 'notas_fiscais';
 
   // ───────────── Map ⇄ Entidade ─────────────
-  factory NotaFiscal.fromMap(Map<String, dynamic> map) => NotaFiscal(
-        id: map['id'] as int?,
-        imagem: map['imagem_path'] != null &&
-                (map['imagem_path'] as String).isNotEmpty
-            ? File(map['imagem_path'] as String)
-            : null,
-        textoExtraido: map['texto_extraido'] as String? ?? '',
-      );
+  factory NotaFiscal.fromMap(Map<String, dynamic> map) {
+    if (map.isEmpty) {
+      return const NotaFiscal(textoExtraido: '');
+    }
+    return NotaFiscal(
+      id: map['id'] as int?,
+      imagem: map['imagem_path'] != null &&
+              (map['imagem_path'] as String).isNotEmpty
+          ? File(map['imagem_path'] as String)
+          : null,
+      textoExtraido: map['texto_extraido'] as String? ?? '',
+    );
+  }
 
   @override
   Map<String, dynamic> toMap() => {

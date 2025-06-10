@@ -29,12 +29,17 @@ class Categoria with EntityMapper {
   String get tableName => 'categorias';
 
   // ───────────── Map ⇄ Entidade ─────────────
-  factory Categoria.fromMap(Map<String, dynamic> map) => Categoria(
-        id: map['id'] as int?,
-        titulo: map['titulo'] as String? ?? '',
-        descricao: map['descricao'] as String? ?? '',
-        parentId: map['parent_id'] as int?,
-      );
+  factory Categoria.fromMap(Map<String, dynamic> map) {
+    if (map.isEmpty) {
+      return const Categoria(titulo: '', descricao: '');
+    }
+    return Categoria(
+      id: map['id'] as int?,
+      titulo: map['titulo'] as String? ?? '',
+      descricao: map['descricao'] as String? ?? '',
+      parentId: map['parent_id'] as int?,
+    );
+  }
 
   @override
   Map<String, dynamic> toMap() => {

@@ -12,6 +12,7 @@ class Gasto with EntityMapper {
   final DateTime data;
   final String categoria;
   final String local;
+  final int usuario_id = 1;
 
   // Not persisted in the same “gastos” table. You’ll likely store produtos
   // in a separate table and join later, but we keep the field here for domain
@@ -62,16 +63,29 @@ class Gasto with EntityMapper {
         'data': data.toIso8601String(),
         'categoria': categoria,
         'local': local,
+        'usuario_id': usuario_id
       };
 
   /// Converts a DB row → entity
-  factory Gasto.fromMap(Map<String, dynamic> map) => Gasto(
-        id: map['id'] as int?,
-        total: (map['total'] as num?)?.toDouble() ?? 0.0,
-        data: DateTime.parse(map['data'] as String), // ISO-8601 stored
-        categoria: map['categoria'] as String? ?? '',
-        local: map['local'] as String? ?? '',
+  factory Gasto.fromMap(Map<String, dynamic> map) {
+    if (map.isEmpty) {
+      return Gasto(
+        total: 0.0,
+        data: DateTime.now(),
+        categoria: '',
+        local: '',
       );
+    }
+    return Gasto(
+      id: map['id'] as int?,
+      total: (map['total'] as num?)?.toDouble() ?? 0.0,
+      data: map['data'] != null
+          ? DateTime.parse(map['data'] as String)
+          : DateTime.now(),
+      categoria: map['categoria'] as String? ?? '',
+      local: map['local'] as String? ?? '',
+    );
+  }
 
   /// Recomputes total from the embedded list, if you opt to keep it in memory.
   double calcularTotal() => produtos.isEmpty
@@ -87,5 +101,5 @@ class Gasto with EntityMapper {
   }
 
   @override
-  String get tableName => "gasto";
+  String get tableName => "gastos";
 }

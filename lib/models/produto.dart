@@ -22,12 +22,17 @@ class Produto with EntityMapper {
   String get tableName => 'produtos';
 
   // ───────────── Map ⇄ Entidade (ORM manual) ─────────────
-  factory Produto.fromMap(Map<String, dynamic> map) => Produto(
-        id: map['id'] as int?,
-        nome: map['nome'] as String? ?? '',
-        preco: (map['preco'] as num?)?.toDouble() ?? 0.0,
-        quantidade: (map['quantidade'] as num?)?.toInt() ?? 0,
-      );
+  factory Produto.fromMap(Map<String, dynamic> map) {
+    if (map.isEmpty) {
+      return const Produto(nome: '', preco: 0.0, quantidade: 0);
+    }
+    return Produto(
+      id: map['id'] as int?,
+      nome: map['nome'] as String? ?? '',
+      preco: (map['preco'] as num?)?.toDouble() ?? 0.0,
+      quantidade: (map['quantidade'] as num?)?.toInt() ?? 0,
+    );
+  }
 
   @override
   Map<String, dynamic> toMap() => {
