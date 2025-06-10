@@ -1,7 +1,7 @@
 // lib/models/produto.dart
-import 'base/entity_mapper.dart';
+import 'base/user_entity.dart';
 
-class Produto with EntityMapper {
+class Produto extends UserEntity {
   // ─────────────────── Campos ───────────────────
   @override
   final int? id; // null antes de persistir
@@ -11,11 +11,12 @@ class Produto with EntityMapper {
 
   // ───────────────── Construtor ─────────────────
   const Produto({
-    this.id,
+    int? id,
+    required int usuarioId,
     required this.nome,
     required this.preco,
     required this.quantidade,
-  });
+  }) : super(id: id, usuarioId: usuarioId);
 
   // ─────── Nome da tabela exigido pelo EntityMapper ───────
   @override
@@ -24,10 +25,11 @@ class Produto with EntityMapper {
   // ───────────── Map ⇄ Entidade (ORM manual) ─────────────
   factory Produto.fromMap(Map<String, dynamic> map) {
     if (map.isEmpty) {
-      return const Produto(nome: '', preco: 0.0, quantidade: 0);
+      return const Produto(usuarioId: 0, nome: '', preco: 0.0, quantidade: 0);
     }
     return Produto(
       id: map['id'] as int?,
+      usuarioId: (map['usuario_id'] as int?) ?? 0,
       nome: map['nome'] as String? ?? '',
       preco: (map['preco'] as num?)?.toDouble() ?? 0.0,
       quantidade: (map['quantidade'] as num?)?.toInt() ?? 0,
@@ -37,6 +39,7 @@ class Produto with EntityMapper {
   @override
   Map<String, dynamic> toMap() => {
         'id': id,
+        'usuario_id': usuarioId,
         'nome': nome,
         'preco': preco,
         'quantidade': quantidade,
@@ -49,12 +52,14 @@ class Produto with EntityMapper {
   /// Retorna uma nova instância com campos alterados (imutabilidade).
   Produto copyWith({
     int? id,
+    int? usuarioId,
     String? nome,
     double? preco,
     int? quantidade,
   }) =>
       Produto(
         id: id ?? this.id,
+        usuarioId: usuarioId ?? this.usuarioId,
         nome: nome ?? this.nome,
         preco: preco ?? this.preco,
         quantidade: quantidade ?? this.quantidade,

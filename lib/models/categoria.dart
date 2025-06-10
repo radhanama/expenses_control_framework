@@ -1,7 +1,7 @@
 // lib/models/categoria.dart
-import 'base/entity_mapper.dart';
+import 'base/user_entity.dart';
 
-class Categoria with EntityMapper {
+class Categoria extends UserEntity {
   // ────────────────── Campos ──────────────────
   @override
   final int? id; // PK (null antes de persistir)
@@ -17,12 +17,13 @@ class Categoria with EntityMapper {
 
   // ───────────────── Construtor ─────────────────
   const Categoria({
-    this.id,
+    int? id,
+    required int usuarioId,
     required this.titulo,
     required this.descricao,
     this.parentId,
     this.subcategorias = const [],
-  });
+  }) : super(id: id, usuarioId: usuarioId);
 
   // ─────────── Nome da tabela (EntityMapper) ───────────
   @override
@@ -31,10 +32,11 @@ class Categoria with EntityMapper {
   // ───────────── Map ⇄ Entidade ─────────────
   factory Categoria.fromMap(Map<String, dynamic> map) {
     if (map.isEmpty) {
-      return const Categoria(titulo: '', descricao: '');
+      return const Categoria(usuarioId: 0, titulo: '', descricao: '');
     }
     return Categoria(
       id: map['id'] as int?,
+      usuarioId: (map['usuario_id'] as int?) ?? 0,
       titulo: map['titulo'] as String? ?? '',
       descricao: map['descricao'] as String? ?? '',
       parentId: map['parent_id'] as int?,
@@ -47,6 +49,7 @@ class Categoria with EntityMapper {
         'titulo': titulo,
         'descricao': descricao,
         'parent_id': parentId,
+        'usuario_id': usuarioId,
       };
 
   // ───────────── Lógica de domínio ─────────────
@@ -67,6 +70,7 @@ class Categoria with EntityMapper {
   // ---------- Helpers ----------
   Categoria copyWith({
     int? id,
+    int? usuarioId,
     String? titulo,
     String? descricao,
     int? parentId,
@@ -74,6 +78,7 @@ class Categoria with EntityMapper {
   }) =>
       Categoria(
         id: id ?? this.id,
+        usuarioId: usuarioId ?? this.usuarioId,
         titulo: titulo ?? this.titulo,
         descricao: descricao ?? this.descricao,
         parentId: parentId ?? this.parentId,

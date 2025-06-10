@@ -7,21 +7,21 @@ import '../gasto.dart';
 
 class EstatisticaDTO {
   final double totalGastos;
-  final Map<String, double> totalPorCategoria;
+  final Map<int, double> totalPorCategoria;
 
   const EstatisticaDTO({
     required this.totalGastos,
     required this.totalPorCategoria,
   });
 
-  /// Very simple calculator: sum values, group by categoria.
+  /// Very simple calculator: sum values, group by categoria id.
   static EstatisticaDTO calcular(List<Gasto> gastos) {
     double total = 0;
-    final mapa = <String, double>{};
+    final mapa = <int, double>{};
 
     for (final g in gastos) {
       total += g.total;
-      mapa.update(g.categoria, (v) => v + g.total, ifAbsent: () => g.total);
+      mapa.update(g.categoriaId, (v) => v + g.total, ifAbsent: () => g.total);
     }
 
     return EstatisticaDTO(totalGastos: total, totalPorCategoria: mapa);
@@ -30,7 +30,7 @@ class EstatisticaDTO {
   // Helper factory used by the common report implementation
   factory EstatisticaDTO.fromRaw(
     double total,
-    Map<String, double> porCategoria,
+    Map<int, double> porCategoria,
   ) =>
       EstatisticaDTO(
         totalGastos: total,

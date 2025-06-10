@@ -1,9 +1,9 @@
 // lib/models/nota_fiscal.dart
 import 'dart:io'; // File for the image path
-import 'base/entity_mapper.dart';
+import 'base/user_entity.dart';
 import 'produto.dart';
 
-class NotaFiscal with EntityMapper {
+class NotaFiscal extends UserEntity {
   // ─────────────────── Campos ───────────────────
   @override
   final int? id; // null antes do insert
@@ -12,10 +12,11 @@ class NotaFiscal with EntityMapper {
 
   // ───────────────── Construtor ─────────────────
   const NotaFiscal({
-    this.id,
+    int? id,
+    required int usuarioId,
     this.imagem,
     required this.textoExtraido,
-  });
+  }) : super(id: id, usuarioId: usuarioId);
 
   // ─────── Nome da tabela exigido pelo EntityMapper ───────
   @override
@@ -24,10 +25,11 @@ class NotaFiscal with EntityMapper {
   // ───────────── Map ⇄ Entidade ─────────────
   factory NotaFiscal.fromMap(Map<String, dynamic> map) {
     if (map.isEmpty) {
-      return const NotaFiscal(textoExtraido: '');
+      return const NotaFiscal(usuarioId: 0, textoExtraido: '');
     }
     return NotaFiscal(
       id: map['id'] as int?,
+      usuarioId: (map['usuario_id'] as int?) ?? 0,
       imagem: map['imagem_path'] != null &&
               (map['imagem_path'] as String).isNotEmpty
           ? File(map['imagem_path'] as String)
@@ -39,6 +41,7 @@ class NotaFiscal with EntityMapper {
   @override
   Map<String, dynamic> toMap() => {
         'id': id,
+        'usuario_id': usuarioId,
         // gravamos apenas o path para não armazenar binário no SQLite
         'imagem_path': imagem?.path,
         'texto_extraido': textoExtraido,
@@ -60,11 +63,13 @@ class NotaFiscal with EntityMapper {
   // ---------- helpers ----------
   NotaFiscal copyWith({
     int? id,
+    int? usuarioId,
     File? imagem,
     String? textoExtraido,
   }) =>
       NotaFiscal(
         id: id ?? this.id,
+        usuarioId: usuarioId ?? this.usuarioId,
         imagem: imagem ?? this.imagem,
         textoExtraido: textoExtraido ?? this.textoExtraido,
       );

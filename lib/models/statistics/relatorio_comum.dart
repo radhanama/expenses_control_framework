@@ -17,7 +17,7 @@ class RelatorioComum implements IEstrategiaEstatistica {
     if (gastos.isEmpty) return EstatisticaDTO.vazio;
 
     double total = 0.0;
-    final Map<String, double> porCategoria = {};
+    final Map<int, double> porCategoria = {};
 
     for (final gasto in gastos) {
       final subtotal = gasto.produtos.isEmpty
@@ -28,7 +28,7 @@ class RelatorioComum implements IEstrategiaEstatistica {
       total += subtotal;
 
       porCategoria.update(
-        gasto.categoria,
+        gasto.categoriaId,
         (value) => value + subtotal,
         ifAbsent: () => subtotal,
       );

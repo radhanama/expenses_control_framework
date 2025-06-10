@@ -1,18 +1,15 @@
 // lib/models/gasto.dart
-import 'base/entity_mapper.dart';
+import 'base/user_entity.dart';
 import 'produto.dart';
 
-class Gasto with EntityMapper {
+class Gasto extends UserEntity {
   // ---------------------------------------------------------------------------
   // Fields
   // ---------------------------------------------------------------------------
-  @override
-  final int? id; // nullable because it’s null before insert
   final double total; // cached total; you can recompute if you want
   final DateTime data;
-  final String categoria;
+  final int categoriaId;
   final String local;
-  final int usuario_id = 1;
 
   // Not persisted in the same “gastos” table. You’ll likely store produtos
   // in a separate table and join later, but we keep the field here for domain
@@ -23,30 +20,33 @@ class Gasto with EntityMapper {
   // Constructor
   // ---------------------------------------------------------------------------
   const Gasto({
-    this.id,
+    int? id,
+    required int usuarioId,
     required this.total,
     required this.data,
-    required this.categoria,
+    required this.categoriaId,
     required this.local,
     this.produtos = const [],
-  });
+  }) : super(id: id, usuarioId: usuarioId);
 
   // ---------------------------------------------------------------------------
   // Domain helpers (optional)
   // ---------------------------------------------------------------------------
   Gasto copyWith({
     int? id,
+    int? usuarioId,
     double? total,
     DateTime? data,
-    String? categoria,
+    int? categoriaId,
     String? local,
     List<Produto>? produtos,
   }) =>
       Gasto(
         id: id ?? this.id,
+        usuarioId: usuarioId ?? this.usuarioId,
         total: total ?? this.total,
         data: data ?? this.data,
-        categoria: categoria ?? this.categoria,
+        categoriaId: categoriaId ?? this.categoriaId,
         local: local ?? this.local,
         produtos: produtos ?? this.produtos,
       );
@@ -61,28 +61,30 @@ class Gasto with EntityMapper {
         'id': id,
         'total': total,
         'data': data.toIso8601String(),
-        'categoria': categoria,
+        'categoria_id': categoriaId,
         'local': local,
-        'usuario_id': usuario_id
+        'usuario_id': usuarioId,
       };
 
   /// Converts a DB row → entity
   factory Gasto.fromMap(Map<String, dynamic> map) {
     if (map.isEmpty) {
       return Gasto(
+        usuarioId: 0,
         total: 0.0,
         data: DateTime.now(),
-        categoria: '',
+        categoriaId: 0,
         local: '',
       );
     }
     return Gasto(
       id: map['id'] as int?,
+      usuarioId: (map['usuario_id'] as int?) ?? 0,
       total: (map['total'] as num?)?.toDouble() ?? 0.0,
       data: map['data'] != null
           ? DateTime.parse(map['data'] as String)
           : DateTime.now(),
-      categoria: map['categoria'] as String? ?? '',
+      categoriaId: map['categoria_id'] as int? ?? 0,
       local: map['local'] as String? ?? '',
     );
   }
