@@ -4,12 +4,12 @@ import 'base/entity_mapper.dart';
 class Categoria with EntityMapper {
   // ────────────────── Campos ──────────────────
   @override
-  final String? id; // PK (null antes de persistir)
+  final int? id; // PK (null antes de persistir)
   final String titulo;
   final String descricao;
 
   /// FK para hierarquia (null se for a raiz)
-  final String? parentId;
+  final int? parentId;
 
   /// As subcategorias podem ser carregadas lazy a partir do BD,
   /// mas deixamos o campo aqui para operações em memória.
@@ -30,10 +30,10 @@ class Categoria with EntityMapper {
 
   // ───────────── Map ⇄ Entidade ─────────────
   factory Categoria.fromMap(Map<String, dynamic> map) => Categoria(
-        id: map['id']?.toString(),
+        id: map['id'] as int?,
         titulo: map['titulo'] as String? ?? '',
         descricao: map['descricao'] as String? ?? '',
-        parentId: map['parent_id']?.toString(),
+        parentId: map['parent_id'] as int?,
       );
 
   @override
@@ -61,10 +61,10 @@ class Categoria with EntityMapper {
 
   // ---------- Helpers ----------
   Categoria copyWith({
-    String? id,
+    int? id,
     String? titulo,
     String? descricao,
-    String? parentId,
+    int? parentId,
     List<Categoria>? subcategorias,
   }) =>
       Categoria(

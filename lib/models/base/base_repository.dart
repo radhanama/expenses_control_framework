@@ -28,7 +28,7 @@ abstract class BaseRepository<T extends EntityMapper> {
   late final T _dummy = _fromMap(const {});
 
   // ─────────────────── Public CRUD ───────────────────
-  Future<T?> findById(String id) async {
+  Future<T?> findById(int id) async {
     final rows =
         await _db.query(_dummy.tableName, where: 'id = ?', whereArgs: [id]);
     return rows.isEmpty ? null : _fromMap(rows.first);
@@ -57,6 +57,6 @@ abstract class BaseRepository<T extends EntityMapper> {
     return entity;
   }
 
-  Future<void> delete(String id) =>
+  Future<void> delete(int id) =>
       _db.delete(_dummy.tableName, where: 'id = ?', whereArgs: [id]);
 }

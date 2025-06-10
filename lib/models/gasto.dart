@@ -7,7 +7,7 @@ class Gasto with EntityMapper {
   // Fields
   // ---------------------------------------------------------------------------
   @override
-  final String? id; // nullable because it’s null before insert
+  final int? id; // nullable because it’s null before insert
   final double total; // cached total; you can recompute if you want
   final DateTime data;
   final String categoria;
@@ -34,7 +34,7 @@ class Gasto with EntityMapper {
   // Domain helpers (optional)
   // ---------------------------------------------------------------------------
   Gasto copyWith({
-    String? id,
+    int? id,
     double? total,
     DateTime? data,
     String? categoria,
@@ -66,7 +66,7 @@ class Gasto with EntityMapper {
 
   /// Converts a DB row → entity
   factory Gasto.fromMap(Map<String, dynamic> map) => Gasto(
-        id: map['id']?.toString(),
+        id: map['id'] as int?,
         total: (map['total'] as num?)?.toDouble() ?? 0.0,
         data: DateTime.parse(map['data'] as String), // ISO-8601 stored
         categoria: map['categoria'] as String? ?? '',

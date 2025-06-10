@@ -4,7 +4,7 @@ import 'base/entity_mapper.dart';
 class Produto with EntityMapper {
   // ─────────────────── Campos ───────────────────
   @override
-  final String? id; // null antes de persistir
+  final int? id; // null antes de persistir
   final String nome;
   final double preco;
   final int quantidade;
@@ -23,7 +23,7 @@ class Produto with EntityMapper {
 
   // ───────────── Map ⇄ Entidade (ORM manual) ─────────────
   factory Produto.fromMap(Map<String, dynamic> map) => Produto(
-        id: map['id']?.toString(),
+        id: map['id'] as int?,
         nome: map['nome'] as String? ?? '',
         preco: (map['preco'] as num?)?.toDouble() ?? 0.0,
         quantidade: (map['quantidade'] as num?)?.toInt() ?? 0,
@@ -43,7 +43,7 @@ class Produto with EntityMapper {
 
   /// Retorna uma nova instância com campos alterados (imutabilidade).
   Produto copyWith({
-    String? id,
+    int? id,
     String? nome,
     double? preco,
     int? quantidade,

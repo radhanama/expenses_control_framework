@@ -10,7 +10,7 @@ import 'statistics/estatistica_dto.dart'; // implement or swap for your own DTO
 class Usuario with EntityMapper {
   // ─────────────────── Fields ───────────────────
   @override
-  final String? id;
+  final int? id;
   final String nome;
   final String email;
   final String senhaHash; // stored hash, not plaintext
@@ -32,7 +32,7 @@ class Usuario with EntityMapper {
   String get tableName => 'usuarios';
 
   factory Usuario.fromMap(Map<String, dynamic> map) => Usuario(
-        id: map['id']?.toString(),
+        id: map['id'] as int?,
         nome: map['nome'] as String? ?? '',
         email: map['email'] as String? ?? '',
         senhaHash: map['senha_hash'] as String? ?? '',
@@ -56,7 +56,7 @@ class Usuario with EntityMapper {
 
   // ---------- copyWith ----------
   Usuario copyWith({
-    String? id,
+    int? id,
     String? nome,
     String? email,
     String? senhaHash,

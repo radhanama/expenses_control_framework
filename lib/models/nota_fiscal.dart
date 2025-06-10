@@ -6,7 +6,7 @@ import 'produto.dart';
 class NotaFiscal with EntityMapper {
   // ─────────────────── Campos ───────────────────
   @override
-  final String? id; // null antes do insert
+  final int? id; // null antes do insert
   final File? imagem; // imagem no storage local (opcional)
   final String textoExtraido; // OCR completo já limpo
 
@@ -23,7 +23,7 @@ class NotaFiscal with EntityMapper {
 
   // ───────────── Map ⇄ Entidade ─────────────
   factory NotaFiscal.fromMap(Map<String, dynamic> map) => NotaFiscal(
-        id: map['id']?.toString(),
+        id: map['id'] as int?,
         imagem: map['imagem_path'] != null &&
                 (map['imagem_path'] as String).isNotEmpty
             ? File(map['imagem_path'] as String)
@@ -54,7 +54,7 @@ class NotaFiscal with EntityMapper {
 
   // ---------- helpers ----------
   NotaFiscal copyWith({
-    String? id,
+    int? id,
     File? imagem,
     String? textoExtraido,
   }) =>
