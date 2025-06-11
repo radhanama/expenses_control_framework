@@ -8,7 +8,7 @@ class Produto extends BaseUserEntity {
   final int quantidade;
 
   // ───────────────── Construtor ─────────────────
-  const Produto({
+  Produto({
     super.id,
     required super.usuarioId,
     required this.nome,
@@ -23,7 +23,7 @@ class Produto extends BaseUserEntity {
   // ───────────── Map ⇄ Entidade (ORM manual) ─────────────
   factory Produto.fromMap(Map<String, dynamic> map) {
     if (map.isEmpty) {
-      return const Produto(usuarioId: 0, nome: '', preco: 0.0, quantidade: 0);
+      return Produto(usuarioId: 0, nome: '', preco: 0.0, quantidade: 0);
     }
     return Produto(
       id: map['id'] as int?,

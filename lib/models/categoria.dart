@@ -14,7 +14,7 @@ class Categoria extends BaseUserEntity {
   final List<Categoria> subcategorias;
 
   // ───────────────── Construtor ─────────────────
-  const Categoria({
+  Categoria({
     super.id,
     required super.usuarioId,
     required this.titulo,
@@ -30,7 +30,7 @@ class Categoria extends BaseUserEntity {
   // ───────────── Map ⇄ Entidade ─────────────
   factory Categoria.fromMap(Map<String, dynamic> map) {
     if (map.isEmpty) {
-      return const Categoria(usuarioId: 0, titulo: '', descricao: '');
+      return Categoria(usuarioId: 0, titulo: '', descricao: '');
     }
     return Categoria(
       id: map['id'] as int?,

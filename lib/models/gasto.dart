@@ -19,7 +19,7 @@ class Gasto extends BaseUserEntity {
   // ---------------------------------------------------------------------------
   // Constructor
   // ---------------------------------------------------------------------------
-  const Gasto({
+  Gasto({
     super.id,
     required super.usuarioId,
     required this.total,
