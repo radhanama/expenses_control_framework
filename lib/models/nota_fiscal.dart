@@ -9,7 +9,7 @@ class NotaFiscal extends BaseUserEntity {
   final String textoExtraido; // OCR completo já limpo
 
   // ───────────────── Construtor ─────────────────
-  const NotaFiscal({
+  NotaFiscal({
     super.id,
     required super.usuarioId,
     this.imagem,
@@ -23,7 +23,7 @@ class NotaFiscal extends BaseUserEntity {
   // ───────────── Map ⇄ Entidade ─────────────
   factory NotaFiscal.fromMap(Map<String, dynamic> map) {
     if (map.isEmpty) {
-      return const NotaFiscal(usuarioId: 0, textoExtraido: '');
+      return NotaFiscal(usuarioId: 0, textoExtraido: '');
     }
     return NotaFiscal(
       id: map['id'] as int?,
