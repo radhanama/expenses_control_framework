@@ -5,7 +5,7 @@
 
 import 'base/entity_mapper.dart';
 import 'gasto.dart';
-import 'statistics/estatistica_dto.dart'; // implement or swap for your own DTO
+import 'dashboard/dashboard_dto.dart'; // implement or swap for your own DTO
 
 class Usuario with EntityMapper {
   // ─────────────────── Fields ───────────────────
@@ -56,8 +56,8 @@ class Usuario with EntityMapper {
 
   List<Gasto> listarGastos() => List.unmodifiable(gastos);
 
-  EstatisticaDTO verEstatisticas() =>
-      EstatisticaDTO.calcular(gastos); // implement in your stats layer
+  DashboardDTO verEstatisticas() =>
+      DashboardDTO.calcular(gastos); // implement in your stats layer
 
   // ---------- copyWith ----------
   Usuario copyWith({

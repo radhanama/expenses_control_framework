@@ -94,6 +94,11 @@ class Gasto extends BaseUserEntity {
       ? total
       : produtos.fold<double>(0.0, (sum, p) => sum + p.calcularSubtotal());
 
+  /// Retorna a quantidade total de produtos em uma lista de Gasto.
+  int quantidadeTotalProdutos() {
+    return produtos.length;
+  }
+
   /// Returns a **new** Gasto with an extra product (immutability pattern).
   Gasto adicionarProduto(Produto p) {
     final novaLista = List<Produto>.from(produtos)..add(p);
