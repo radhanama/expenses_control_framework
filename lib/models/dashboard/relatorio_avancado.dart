@@ -13,7 +13,7 @@ import 'package:collection/collection.dart';
 
 class RelatorioAvancado implements IEstrategiaDashboard {
   @override
-  DashboardDTO gerarEstatistica(List<Gasto> gastos) {
+  DashboardDTO geraRelatorio(List<Gasto> gastos) {
     if (gastos.isEmpty) return DashboardDTO.vazio;
 
     return DashboardDTO(

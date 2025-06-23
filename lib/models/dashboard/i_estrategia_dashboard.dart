@@ -7,7 +7,5 @@ import '../gasto.dart';
 import 'dashboard_dto.dart';
 
 abstract class IEstrategiaDashboard {
-  /// Consumes a list of gastos and returns whatever metrics your
-  /// UI/view-model needs.  May throw if the list is empty or malformed.
-  DashboardDTO gerarEstatistica(List<Gasto> gastos);
+  DashboardDTO geraRelatorio(List<Gasto> gastos);
 }

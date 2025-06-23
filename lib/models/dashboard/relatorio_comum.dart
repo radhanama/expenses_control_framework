@@ -13,7 +13,7 @@ import 'dashboard_dto.dart';
 
 class RelatorioComum implements IEstrategiaDashboard {
   @override
-  DashboardDTO gerarEstatistica(List<Gasto> gastos) {
+  DashboardDTO geraRelatorio(List<Gasto> gastos) {
     if (gastos.isEmpty) return DashboardDTO.vazio;
 
     final totalGastos = gastos.map((g) => g.total).fold(0.0, (a, b) => a + b);

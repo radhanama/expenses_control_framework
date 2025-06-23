@@ -5,7 +5,7 @@
 
 import 'base/entity_mapper.dart';
 import 'gasto.dart';
-import 'statistics/dashboard_dto.dart'; // implement or swap for your own DTO
+import 'dashboard/dashboard_dto.dart'; // implement or swap for your own DTO
 
 class Usuario with EntityMapper {
   // ─────────────────── Fields ───────────────────

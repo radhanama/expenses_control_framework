@@ -1,6 +1,3 @@
-// Simple DTO shared by any strategy implementation.
-// Feel free to extend or swap with more advanced fields later.
-
 import '../gasto.dart';
 
 class DashboardDTO {
